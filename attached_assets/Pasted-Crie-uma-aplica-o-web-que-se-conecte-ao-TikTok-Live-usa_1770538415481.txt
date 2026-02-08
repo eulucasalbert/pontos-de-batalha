@@ -1,0 +1,119 @@
+Crie uma aplicação web que se conecte ao TikTok Live usando exclusivamente o TikTok Live Connector:
+
+https://github.com/zerodytrash/TikTok-Live-Connector?tab=readme-ov-file#events
+
+O usuário só precisa informar o @username do criador da live — todo o resto deve ser automático.
+
+1) Fluxo de conexão (TOTALMENTE AUTOMÁTICO)
+
+A ferramenta deve:
+
+O usuário digita @username do host da live.
+
+A aplicação conecta ao TikTok Live Connector automaticamente.
+
+A ferramenta deve:
+
+Identificar que a live entrou em modo BATTLE
+
+Detectar os dois participantes automaticamente (lado A e lado B)
+
+Buscar:
+
+Nome de cada participante
+
+Foto de perfil de cada participante
+
+Pontuação de estrelas ⭐ de cada lado
+
+Status de vencedor/perdedor de cada round
+
+📌 Fonte obrigatória dos dados:
+→ Somente eventos do TikTok Live Connector (nada manual).
+
+2) Eventos que DEVEM ser usados obrigatoriamente
+
+A aplicação deve escutar em tempo real pelo Live Connector:
+
+battleStart → quando a batalha inicia
+
+battleUpdate → quando pontuação muda
+
+battleEnd → quando o round termina
+
+battleWinner → quem venceu o round
+
+gift → caso precise validar estrelas
+
+roomUser → para confirmar usuários ativos
+
+A cada evento:
+
+Atualizar overlay automaticamente
+
+Atualizar pontuação em tempo real
+
+3) Overlay para OBS (Fundo Transparente)
+
+Gerar um overlay público em tempo real no formato:
+
+https://meusite.com/overlay?username=@USUARIO
+
+
+Esse link será usado no OBS → Fonte de Navegador → Fundo Transparente
+
+Layout do overlay:
+
+Esquerda = Participante A
+
+Direita = Participante B
+
+Para cada lado:
+
+Foto de perfil circular
+
+Nome do usuário
+
+Estrela ⭐ com pontuação ao lado
+
+Corações ❤️ representando vidas
+
+4) Sistema AUTOMÁTICO de corações (vidas)
+
+Regras automáticas:
+
+Cada participante começa com 5 corações ❤️
+
+Quando um round termina:
+
+O sistema identifica automaticamente quem perdeu
+
+O perdedor perde 1 coração
+
+O vencedor não ganha coração
+
+Se quem perdeu vencer depois:
+
+Ele NÃO recupera corações
+
+Ele continua com os mesmos que restaram
+
+Ou seja:
+👉 Corações SÓ DIMINUEM quando perde — nunca aumentam por vitória.
+
+5) Painel de Controle (APENAS AJUSTE MANUAL)
+
+O host terá um painel opcional (não interfere nos eventos automáticos):
+
+Botões:
+
+➕ Adicionar coração manualmente (A ou B)
+
+➖ Remover coração manualmente (A ou B)
+
+🔄 Resetar corações (volta ambos para 5)
+
+🔄 Resetar batalha (zera tudo e espera nova battleStart)
+
+📌 Importante:
+Esses botões não controlam a batalha do TikTok, apenas corrigem visualmente o overlay caso precise.
